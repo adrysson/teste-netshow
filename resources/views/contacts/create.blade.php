@@ -68,23 +68,19 @@
                 @enderror
             </div>
 
-            <div class="md-form">
-                <div class="input-group">
-                    <div class="custom-file">
-                        <label class="custom-file-label" for="attachment">
-                            @lang('Escolha um arquivo para anexar')
-                        </label>
-                        <input type="file" class="custom-file-input @error('attachment') is-invalid @enderror" id="attachment" aria-describedby="attachment">
-                        @error('attachment')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </div>
+            <div class="custom-file @error('attachment') was-validated @enderror">
+                <input type="file" class="custom-file-input @error('attachment') is-invalid @enderror" id="attachment" aria-describedby="attachment" @error('attachment') required @enderror>
+                <label class="custom-file-label" for="attachment">
+                    @lang('Escolha um arquivo para anexar')
+                </label>
+                @error('attachment')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
 
-            <div class="text-md-left">
+            <div class="text-md-left mt-3">
                 <button type="submit" class="btn btn-primary">
                     @lang('Enviar')
                 </button>
