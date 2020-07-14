@@ -17,44 +17,69 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="md-form mb-0">
-                        <input type="text" id="name" name="name" class="form-control">
                         <label for="name">
                             @lang('Seu nome')
                         </label>
+                        <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror">
+                        @error('name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="md-form mb-0">
-                        <input type="email" id="email" name="email" class="form-control">
                         <label for="email">
                             @lang('Seu e-mail')
                         </label>
+                        <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror">
+                        @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
             </div>
 
             <div class="md-form mb-0">
-                <input type="tel" id="phone" name="phone" class="form-control phone">
                 <label for="phone">
                     @lang('Telefone')
                 </label>
+                <input type="tel" id="phone" name="phone" class="form-control phone @error('phone') is-invalid @enderror">
+                @error('phone')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
 
             <div class="md-form">
-                <textarea type="text" id="message" name="message" rows="3" class="form-control md-textarea"></textarea>
                 <label for="message">
                     @lang('Mensagem')
                 </label>
+                <textarea type="text" id="message" name="message" rows="3" class="form-control md-textarea @error('message') is-invalid @enderror"></textarea>
+                @error('message')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
 
             <div class="md-form">
                 <div class="input-group">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="attachment" aria-describedby="attachment">
                         <label class="custom-file-label" for="attachment">
                             @lang('Escolha um arquivo para anexar')
                         </label>
+                        <input type="file" class="custom-file-input @error('attachment') is-invalid @enderror" id="attachment" aria-describedby="attachment">
+                        @error('attachment')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
             </div>
