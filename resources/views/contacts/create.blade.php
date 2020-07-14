@@ -35,7 +35,7 @@
             </div>
 
             <div class="md-form mb-0">
-                <input type="tel" id="phone" name="phone" class="form-control">
+                <input type="tel" id="phone" name="phone" class="form-control phone">
                 <label for="phone">
                     @lang('Telefone')
                 </label>
@@ -68,3 +68,7 @@
     </div>
 </section>
 @endsection
+
+@push('scripts')
+    <script src="js/contact.js"></script>
+@endpush
