@@ -2,10 +2,22 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\PhoneRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ContactRequest extends FormRequest
 {
+    /**
+     * Formatos válidos para anexo com seus respectivos MIME Types
+     */
+    private $mimes = [
+        'pdf' => 'application/pdf',
+        'doc' => 'application/msword',
+        'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        'odt' => 'application/vnd.oasis.opendocument.text',
+        'txt' => 'text/plain',
+    ];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -24,11 +36,29 @@ class ContactRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required'],
-            'email' => ['required', 'email'],
-            'phone' => ['required'],
-            'message' => ['required'],
-            'attachment' => ['required'],
+            'name' => ['required', 'string'],
+            'email' => ['required', 'string', 'email'],
+            'phone' => ['required', 'string', new PhoneRule],
+            'message' => ['required', 'string'],
+            'attachment' => ['required', 'file', 'max:800', 'mimes:' . $this->getMimes(), 'mimetypes:' . $this->getMimesTypes()],
         ];
+    }
+
+    /**
+     * Retorna lista de MIME Types mais simples, apenas com a extensão do arquivo
+     */
+    private function getMimes()
+    {
+        $mimesKeys = array_keys($this->mimes);
+        return implode(',', $mimesKeys);
+    }
+
+    /**
+     * Retorna lista de MIME Types mais avançada, de acordo com o tipo do arquivo
+     */
+    private function getMimesTypes()
+    {
+        $mimesValues = array_values($this->mimes);
+        return implode(',', $mimesValues);
     }
 }
