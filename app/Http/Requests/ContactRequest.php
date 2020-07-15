@@ -29,6 +29,18 @@ class ContactRequest extends FormRequest
     }
 
     /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'ip' => $this->getClientIp(),
+        ]);
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -40,7 +52,8 @@ class ContactRequest extends FormRequest
             'email' => ['required', 'string', 'email'],
             'phone' => ['required', 'string', new PhoneRule],
             'message' => ['required', 'string'],
-            'attachment' => ['required', 'file', 'max:800', 'mimes:' . $this->getMimes(), 'mimetypes:' . $this->getMimesTypes()],
+            'file' => ['required', 'file', 'max:500', 'mimes:' . $this->getMimes(), 'mimetypes:' . $this->getMimesTypes()],
+            'ip' => ['required', 'ip'],
         ];
     }
 
