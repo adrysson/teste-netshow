@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
-use Ramsey\Uuid\Uuid;
 
 class Contact extends Model
 {
@@ -24,12 +23,4 @@ class Contact extends Model
     protected $casts = [
         'id' => 'string',
     ];
-
-    public static function boot()
-    {
-        parent::boot();
-        static::creating(function ($obj) {
-            $obj->id = Uuid::uuid4();
-        });
-    }
 }
