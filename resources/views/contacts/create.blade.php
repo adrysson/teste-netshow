@@ -12,7 +12,7 @@
     </p>
 
     <div class="col-md-8 offset-md-2 mb-5">
-        <form id="contact-form" action="{{ route('contacts.store') }}" method="POST">
+        <form id="contact-form" action="{{ route('contacts.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-md-6">
@@ -20,7 +20,7 @@
                         <label for="name">
                             @lang('Seu nome')
                         </label>
-                        <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror">
+                        <input type="text" value="{{ old('name') }}" id="name" name="name" class="form-control @error('name') is-invalid @enderror">
                         @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -34,7 +34,7 @@
                         <label for="email">
                             @lang('Seu e-mail')
                         </label>
-                        <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror">
+                        <input type="email" value="{{ old('email') }}" id="email" name="email" class="form-control @error('email') is-invalid @enderror">
                         @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -48,7 +48,7 @@
                 <label for="phone">
                     @lang('Telefone')
                 </label>
-                <input type="tel" id="phone" name="phone" class="form-control phone @error('phone') is-invalid @enderror">
+                <input type="tel" value="{{ old('phone') }}" id="phone" name="phone" class="form-control phone @error('phone') is-invalid @enderror">
                 @error('phone')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -60,7 +60,7 @@
                 <label for="message">
                     @lang('Mensagem')
                 </label>
-                <textarea type="text" id="message" name="message" rows="3" class="form-control md-textarea @error('message') is-invalid @enderror"></textarea>
+                <textarea type="text" id="message" name="message" rows="3" class="form-control md-textarea @error('message') is-invalid @enderror">{{ old('message') }}</textarea>
                 @error('message')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -69,7 +69,7 @@
             </div>
 
             <div class="custom-file @error('attachment') was-validated @enderror">
-                <input type="file" class="custom-file-input @error('attachment') is-invalid @enderror" id="attachment" aria-describedby="attachment" @error('attachment') required @enderror>
+                <input type="file" class="custom-file-input @error('attachment') is-invalid @enderror" id="attachment" name="attachment" aria-describedby="attachment" required>
                 <label class="custom-file-label" for="attachment">
                     @lang('Escolha um arquivo para anexar')
                 </label>
