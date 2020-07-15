@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactRequest;
+use App\Mail\ContactRegistered;
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class ContactController extends Controller
@@ -32,7 +34,7 @@ class ContactController extends Controller
         $request->request->add(['attachment' => $path]);
 
         if ($contact = Contact::create($request->all())) {
-            // event(new Registered($contact));
+            Mail::to($contact)->send(new ContactRegistered($contact));
             return redirect(route('contacts.create'))->with('success', trans('Email enviado com sucesso! Aguarde nosso contato!'));
         }
 
