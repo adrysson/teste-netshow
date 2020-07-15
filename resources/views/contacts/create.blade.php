@@ -20,7 +20,7 @@
                         <label for="name">
                             @lang('Seu nome')
                         </label>
-                        <input type="text" value="{{ old('name') }}" id="name" name="name" class="form-control @error('name') is-invalid @enderror">
+                        <input type="text" value="{{ old('name') }}" id="name" name="name" class="form-control @error('name') is-invalid @enderror" required>
                         @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -34,7 +34,7 @@
                         <label for="email">
                             @lang('Seu e-mail')
                         </label>
-                        <input type="email" value="{{ old('email') }}" id="email" name="email" class="form-control @error('email') is-invalid @enderror">
+                        <input type="email" value="{{ old('email') }}" id="email" name="email" class="form-control @error('email') is-invalid @enderror" required>
                         @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -48,7 +48,7 @@
                 <label for="phone">
                     @lang('Telefone')
                 </label>
-                <input type="tel" value="{{ old('phone') }}" id="phone" name="phone" class="form-control phone @error('phone') is-invalid @enderror">
+                <input type="tel" value="{{ old('phone') }}" id="phone" name="phone" class="form-control phone @error('phone') is-invalid @enderror" required>
                 @error('phone')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -60,7 +60,7 @@
                 <label for="message">
                     @lang('Mensagem')
                 </label>
-                <textarea type="text" id="message" name="message" rows="3" class="form-control md-textarea @error('message') is-invalid @enderror">{{ old('message') }}</textarea>
+                <textarea type="text" id="message" name="message" rows="3" class="form-control md-textarea @error('message') is-invalid @enderror" required>{{ old('message') }}</textarea>
                 @error('message')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
