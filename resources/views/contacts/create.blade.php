@@ -68,12 +68,12 @@
                 @enderror
             </div>
 
-            <div class="custom-file @error('attachment') was-validated @enderror">
-                <input type="file" class="custom-file-input @error('attachment') is-invalid @enderror" id="attachment" name="attachment" aria-describedby="attachment" required>
-                <label class="custom-file-label" for="attachment">
+            <div class="custom-file @error('file') was-validated @enderror">
+                <input type="file" class="custom-file-input @error('file') is-invalid @enderror" id="file" name="file" aria-describedby="file" required>
+                <label class="custom-file-label" for="file">
                     @lang('Escolha um arquivo para anexar')
                 </label>
-                @error('attachment')
+                @error('file')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>

@@ -13,5 +13,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'ContactController@create');
+Route::get('/', 'ContactController@create')->name('contacts.create');
 Route::resource('contacts', 'ContactController')->only('store');
