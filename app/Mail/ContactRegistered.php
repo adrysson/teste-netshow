@@ -34,6 +34,7 @@ class ContactRegistered extends Mailable implements ShouldQueue
         return $this
             ->from($this->contact->email, $this->contact->name)
             ->subject(trans('Novo e-mail de ' . $this->contact->name))
+            ->attach($this->contact->attachment)
             ->markdown('emails.contact.registered');
     }
 }
