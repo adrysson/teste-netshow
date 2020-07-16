@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Http;
 
+use App\Mail\ContactRegistered;
 use App\Models\Contact;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -47,6 +48,10 @@ class ContactControllerTest extends TestCase
         $response = $this->post(route('contacts.store'), []);
         $response->assertStatus(419);
 
+
+        Mail::fake();
+        Mail::assertNotQueued(ContactRegistered::class);
+
         $data = factory(Contact::class)->make();
         $response = $this->post(route('contacts.store'), array_merge($data->toArray(), [
             '_token' => Session::token(),
@@ -54,5 +59,7 @@ class ContactControllerTest extends TestCase
         $response->assertStatus(302)
             ->assertRedirect(route('contacts.create'))
             ->assertSessionDoesntHaveErrors();
+
+        Mail::assertQueued(ContactRegistered::class);
     }
 }
