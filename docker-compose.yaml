@@ -65,6 +65,19 @@ services:
       - app-network
     volumes:
       - /sessions
+  queue:
+    build: .docker/php-workers
+    container_name: queue-netshow-${APP_ENV}
+    restart: unless-stopped
+    working_dir: /var/www
+    networks:
+      - app-network
+    entrypoint: php artisan queue:work --timeout=50
+    volumes:
+      - .:/var/www
+    depends_on:
+      - db
+      - app
 
 networks:
   app-network:
